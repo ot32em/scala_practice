@@ -1,4 +1,0 @@
-testJar=bin/scalatest_2.11-2.2.1.jar
-scalac -cp $testJar *.scala
-scala -cp $testJar org.scalatest.run
-rm *.class 2> /dev/null
