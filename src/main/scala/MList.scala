@@ -12,7 +12,7 @@ object MList
     else MCons(as.head, apply(as.tail: _*))
   }
 
-  def sum[Int](as: MList[Int]): Int = 
+  def sum(as: MList[Int]): Int = 
   {
     0
   }

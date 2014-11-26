@@ -21,10 +21,10 @@ class MListTest extends FunSuite
     assert(v == 1)
   }
 
-  test("sum")
+  test("Test sum for add ints in MList")
   {
     val ints = MList(1,2,10)
-    assert(ints.sum() == 1+2+10)
+    assert(MList.sum(ints) == 1+2+10)
 
   }
 }
