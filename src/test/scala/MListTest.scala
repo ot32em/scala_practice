@@ -1,11 +1,30 @@
 import org.scalatest.FunSuite
-import mlist.MList
+import mlist._
 
 class MListTest extends FunSuite
 {
-  test("The List Literal construct")
+
+  test("Construct MList")
+  {
+    val l = MCons(1, MCons(2, NList))
+    assert(l.head == 1)
+    assert(l.tail == MCons(2, NList))
+  }
+
+  test("Construct MList via List Literal")
   {
     val l = MList(1,2,3)
-    assert( false )
+    val v = l match {
+      case MCons(h, t) => {assert( h == 1); h}
+      case NList => { assert(false); 0 }
+    }
+    assert(v == 1)
+  }
+
+  test("sum")
+  {
+    val ints = MList(1,2,10)
+    assert(ints.sum() == 1+2+10)
+
   }
 }
