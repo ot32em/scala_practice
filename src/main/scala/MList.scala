@@ -52,4 +52,6 @@ object MList
     case MCons(x, xs) => if( f(x) ) dropWhile_auto(xs)(f) else MCons(x, dropWhile_auto(xs)(f))
   }
 
+  def append[A](as: MList[A], bs: MList[A]): MList[A] = NList
+
 }

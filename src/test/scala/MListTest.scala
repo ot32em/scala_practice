@@ -135,7 +135,17 @@ class MListTest extends FunSuite with Matchers
   //
   // exe 3.5.2
   // def append[A], (List[A], List[A]) => List[A])
-  //
+  test("Exe 3.5.2 append"){
+    val a = MList(1,2,3)
+    val b = MList(4,5,6)
+    val r = append(a, b)
+    r shouldEqual MList(1,2,3,4,5,6)
+
+    val r2 = append(b, a)
+    r2 shouldEqual MList(4,5,6,1,2,3)
+
+  }
+
   // exe 3.6
   // init, that returns a List consisting of all but the last element of a List
   // def init[A] (List[A]) => List[A]
