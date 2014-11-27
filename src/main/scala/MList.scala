@@ -16,4 +16,10 @@ object MList
   {
     0
   }
+
+  def tail[A](as: MList[A]): MList[A] = as match {
+    case _ => as
+  //  case NList => NList
+  //  case MCons(x, xs) => xs
+  }
 }
