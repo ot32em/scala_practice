@@ -32,7 +32,7 @@ class MListTest extends FunSuite
     
   }
 
-  test("exe_3.2 - tail - rm the head") {
+  test("exe_3.2 - tail") {
     val ints = MList(1,2,3,4,5)
     val ints2 = MList.tail(ints)
     assert(ints2 == MList(2,3,4,5))
@@ -40,11 +40,13 @@ class MListTest extends FunSuite
     val ints3 = MList.tail(MList.tail(ints2))
     assert(ints3 == MList(4,5))
 
-    val null = NList
-    assert(MList.tail(null) == NList)
-
     val one = MList(3)
     assert(MList.tail(one) == NList)
 
   }
+  
+  test("exe_3.2 - tail null case") {
+    assert(MList.tail(NList) == NList)
+  }
+
 }
