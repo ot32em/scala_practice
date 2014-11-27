@@ -161,8 +161,22 @@ class MListTest extends FunSuite with Matchers
   // exe 3.6
   // init, that returns a List consisting of all but the last element of a List
   // def init[A] (List[A]) => List[A]
-  //
-  //
+  test("Exe 3.6 init") {
+    val a = MList(1,2,3,4)
+    val r = init(a)
+    r shouldEqual MList(1,2,3)
 
+    val r2 = init(r)
+    r2 shouldEqual MList(1,2)
+  }
+
+  test("exe 3.6 init null case") {
+    val a = MList(1)
+    val r = init(a)
+    r shouldEqual NList
+
+    val r2 = init(NList)
+    r2 shouldEqual NList
+  }
 
 }
