@@ -40,5 +40,9 @@ object MList
     case (MCons(x, xs), n) => if(n < 0) MCons(x, xs) else drop(xs, n-1)
   }
 
-  def dropWhile[A](as: MList[A], f: A => Boolean): MList[A] = NList
+  def dropWhile[A](as: MList[A], f: A => Boolean): MList[A] = as match
+  {
+    case NList => NList
+    case MCons(x, xs) => if( f(x) ) dropWhile(xs, f) else MCons(x, dropWhile(xs, f))
+  }
 }
