@@ -58,7 +58,11 @@ object MList
     case MCons(x, xs) => MCons(x, append(xs, bs))
   }
 
-  def init[A](as: MList[A]): MList[A] = NList
+  def init[A](as: MList[A]): MList[A] = as match {
+    case NList => NList
+    case MCons(x, NList) => NList
+    case MCons(x, xs) => MCons(x, init(xs))
+  }
 
 
 
