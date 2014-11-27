@@ -49,4 +49,20 @@ class MListTest extends FunSuite
     assert(MList.tail(NList) == NList)
   }
 
+
+  test("exe_3 - product") {
+    val a = MList(1.1, 2.2, 3.3)
+    assert(MList.product(a) == 1.1 * 2.2 * 3.3)
+
+    assert(MList.product(MList(1.1, -5.5, 0.9)) == 1.1 * -5.5 * 0.9)
+  }
+
+  test("exe_3 - product 0 case") {
+    assert(MList.product(MList(1.1, 0.0, 2.2, 3.3)) == 0.0)
+    assert(MList.product(MList(-1.1, -4321.2, 0.0, 2.2, 3.3)) == 0.0)
+  }
+
+  test("exe_3 - product null case") {
+    assert(MList.product(NList) == 1.0)
+  }
 }

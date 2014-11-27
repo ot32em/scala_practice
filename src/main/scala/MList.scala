@@ -22,4 +22,6 @@ object MList
     case NList => NList
     case MCons(x, xs) => xs
   }
+
+  def product(as: MList[Double]): Double = 0.0
 }
