@@ -108,4 +108,20 @@ class MListTest extends FunSuite with Matchers
   test("Exe_3.4 - drop null case") {
     drop(NList, 1) shouldEqual NList
   }
+
+  // exe 3.5 
+  // def dropWhile, which removes elements from the List prefix as long as they
+  // match a predicate
+  // def dropWhile[A](l: List[A], f: A=> Boolean): List[A]
+  //
+  // exe 3.5.2
+  // def append[A], (List[A], List[A]) => List[A])
+  //
+  // exe 3.6
+  // init, that returns a List consisting of all but the last element of a List
+  // def init[A] (List[A]) => List[A]
+  //
+  //
+
+
 }
