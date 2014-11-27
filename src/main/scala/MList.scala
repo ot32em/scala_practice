@@ -23,5 +23,9 @@ object MList
     case MCons(x, xs) => xs
   }
 
-  def product(as: MList[Double]): Double = 0.0
+  def product(as: MList[Double]): Double = as match {
+    case NList => 1.0
+    case MCons(0.0, _) => 0.0
+    case MCons(x, xs) => x * product(xs)
+  }
 }

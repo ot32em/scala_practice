@@ -1,7 +1,8 @@
 import org.scalatest.FunSuite
+import org.scalatest.Matchers
 import mlist._
 
-class MListTest extends FunSuite
+class MListTest extends FunSuite with Matchers
 {
 
   test("exe_3 Construct MList")
@@ -54,12 +55,16 @@ class MListTest extends FunSuite
     val a = MList(1.1, 2.2, 3.3)
     assert(MList.product(a) == 1.1 * 2.2 * 3.3)
 
-    assert(MList.product(MList(1.1, -5.5, 0.9)) == 1.1 * -5.5 * 0.9)
+    val result2 = MList.product(MList(1.1, -5.5, 0.9))
+    val expected2 = 1.1 * -5.5 * 0.9
+    result2 should be (expected2 plusOrMinus 0.00001)
   }
 
   test("exe_3 - product 0 case") {
-    assert(MList.product(MList(1.1, 0.0, 2.2, 3.3)) == 0.0)
-    assert(MList.product(MList(-1.1, -4321.2, 0.0, 2.2, 3.3)) == 0.0)
+    val a1 = MList(1.1, 0.0, 2.2, 3.3)
+    assert(MList.product(a1) == 0.0)
+    val a2 = MList(-1.1, -4321.2, 0.0, 2.2, 3.3)
+    assert( MList.product(a2) == 0.0 )
   }
 
   test("exe_3 - product null case") {
