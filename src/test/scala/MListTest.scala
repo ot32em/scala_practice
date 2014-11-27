@@ -33,24 +33,6 @@ class MListTest extends FunSuite with Matchers
     
   }
 
-  test("exe_3.2 - tail") {
-    val ints = MList(1,2,3,4,5)
-    val ints2 = MList.tail(ints)
-    assert(ints2 == MList(2,3,4,5))
-
-    val ints3 = MList.tail(MList.tail(ints2))
-    assert(ints3 == MList(4,5))
-
-    val one = MList(3)
-    assert(MList.tail(one) == NList)
-
-  }
-  
-  test("exe_3.2 - tail null case") {
-    assert(MList.tail(NList) == NList)
-  }
-
-
   test("exe_3 - product") {
     val a = MList(1.1, 2.2, 3.3)
     assert(MList.product(a) == 1.1 * 2.2 * 3.3)
@@ -69,5 +51,38 @@ class MListTest extends FunSuite with Matchers
 
   test("exe_3 - product null case") {
     assert(MList.product(NList) == 1.0)
+  }
+  test("exe_3.2 - tail") {
+    val ints = MList(1,2,3,4,5)
+    val ints2 = MList.tail(ints)
+    assert(ints2 == MList(2,3,4,5))
+
+    val ints3 = MList.tail(MList.tail(ints2))
+    assert(ints3 == MList(4,5))
+
+    val one = MList(3)
+    assert(MList.tail(one) == NList)
+
+  }
+  
+  test("exe_3.2 - tail null case") {
+    assert(MList.tail(NList) == NList)
+  }
+
+
+
+  test("exe_3.3 - setHead") {
+    val a = MList(1,2,3,4,5)
+    val r = MList.setHead(a, 999)
+    r should equal (MList(999,2,3,4,5))
+
+    val a2 = MList(6,31,21,3)
+    val r2 = MList.setHead(a2, -3)
+    r2 should equal (MList(-3,31,21,3))
+  }
+
+  test("exe_3.3 - setHead null case") {
+    val r = MList.setHead(NList, 3)
+    r should equal (NList)
   }
 }

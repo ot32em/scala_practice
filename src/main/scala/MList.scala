@@ -28,4 +28,6 @@ object MList
     case MCons(0.0, _) => 0.0
     case MCons(x, xs) => x * product(xs)
   }
+
+  def setHead[A](as: MList[A], new_a: A): MList[A] = NList
 }
