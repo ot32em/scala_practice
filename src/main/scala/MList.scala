@@ -45,4 +45,6 @@ object MList
     case NList => NList
     case MCons(x, xs) => if( f(x) ) dropWhile(xs, f) else MCons(x, dropWhile(xs, f))
   }
+
+  def dropWhile_auto[A](as: MList[A])(f: A => Boolean): MList[A] = NList
 }
