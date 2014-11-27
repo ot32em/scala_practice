@@ -143,7 +143,19 @@ class MListTest extends FunSuite with Matchers
 
     val r2 = append(b, a)
     r2 shouldEqual MList(4,5,6,1,2,3)
+  }
 
+  test("Exe 3.5.2 append null case") {
+    val a = MList(1,2,3)
+
+    val r = append(NList, a)
+    r shouldEqual a
+
+    val r2 = append(a, NList)
+    r2 shouldEqual a
+
+    val r3 = append(NList, NList)
+    r3 shouldEqual NList
   }
 
   // exe 3.6
