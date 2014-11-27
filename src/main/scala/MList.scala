@@ -34,5 +34,9 @@ object MList
     case MCons(x, xs) => MCons(na, xs)
   }
 
-  def drop[A](as: MList[A], n: Int): MList[A] = NList
+  def drop[A](as: MList[A], n: Int): MList[A] = (as, n) match {
+    case (NList, _) => NList
+    case (xs, 0) => xs
+    case (MCons(x, xs), n) => if(n < 0) MCons(x, xs) else drop(xs, n-1)
+  }
 }
