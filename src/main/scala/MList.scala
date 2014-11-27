@@ -12,16 +12,14 @@ object MList
     else MCons(as.head, apply(as.tail: _*))
   }
 
-  def sum(as: MList[Int]): Int = as match
-  {
-    case NList => 0
-    case MCons(x, xs) => x + sum(xs)
-  }
+  def sum(as: MList[Int]): Int = foldRight(as, 0)(_+_)
 
-  def product(as: MList[Double]): Double = as match {
-    case NList => 1.0
-    case MCons(0.0, _) => 0.0
-    case MCons(x, xs) => x * product(xs)
+  def product(as: MList[Double]): Double = foldRight(as, 1.0)(_*_)
+
+  def foldRight[A](as: MList[A], a: A)(f: (A, A) => A): A = as match
+  {
+    case NList => a
+    case MCons(x, xs) => f(x, foldRight(xs, a)(f))
   }
 
   def tail[A](as: MList[A]): MList[A] = as match {
