@@ -84,4 +84,28 @@ class MListTest extends FunSuite with Matchers
     val r = setHead(NList, 3)
     r should equal (NList)
   }
+
+
+  test("exe_3.4 - drop") {
+    val a = MList(1,2,3,4,5)
+    drop(a, 2) shouldEqual MList(3,4,5)
+    drop(a, 4) shouldEqual MList(5)
+    drop(a, 5) shouldEqual NList
+  }
+
+  test("Exe_3.4 - drop too much") {
+    val a = MList(1,2,3,4,5)
+    drop(a, 6) shouldEqual NList
+    drop(a, 19) shouldEqual NList
+  }
+
+  test("Exe_3.4 - drop negative items") {
+    val a = MList(1,2,3,4,5)
+    drop(a, -1) shouldEqual a
+    drop(a, -10) shouldEqual a
+  }
+
+  test("Exe_3.4 - drop null case") {
+    drop(NList, 1) shouldEqual NList
+  }
 }

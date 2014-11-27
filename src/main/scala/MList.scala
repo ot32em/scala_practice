@@ -33,4 +33,6 @@ object MList
     case NList => NList
     case MCons(x, xs) => MCons(na, xs)
   }
+
+  def drop[A](as: MList[A], n: Int): MList[A] = NList
 }
