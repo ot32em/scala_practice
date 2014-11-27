@@ -18,16 +18,17 @@ object MList
     case MCons(x, xs) => x + sum(xs)
   }
 
-  def tail[A](as: MList[A]): MList[A] = as match {
-    case NList => NList
-    case MCons(x, xs) => xs
-  }
-
   def product(as: MList[Double]): Double = as match {
     case NList => 1.0
     case MCons(0.0, _) => 0.0
     case MCons(x, xs) => x * product(xs)
   }
+
+  def tail[A](as: MList[A]): MList[A] = as match {
+    case NList => NList
+    case MCons(x, xs) => xs
+  }
+
 
   def setHead[A](as: MList[A], na: A): MList[A] = as match {
     case NList => NList
