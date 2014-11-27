@@ -29,5 +29,8 @@ object MList
     case MCons(x, xs) => x * product(xs)
   }
 
-  def setHead[A](as: MList[A], new_a: A): MList[A] = NList
+  def setHead[A](as: MList[A], new_a: A): MList[A] = as match {
+    case NList => NList
+    case MCons(x, xs) => MCons(new_a, xs)
+  }
 }
