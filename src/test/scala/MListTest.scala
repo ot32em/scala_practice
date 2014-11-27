@@ -1,6 +1,7 @@
 import org.scalatest.FunSuite
 import org.scalatest.Matchers
 import mlist._
+import mlist.MList._
 
 class MListTest extends FunSuite with Matchers
 {
@@ -24,65 +25,63 @@ class MListTest extends FunSuite with Matchers
 
   test("exe_3 Test sum for add ints in MList") {
     val ints = MList(1,2,10)
-    assert(MList.sum(ints) == 1+2+10)
+    assert(sum(ints) == 1+2+10)
 
     val ints2 = MList(2, -2)
-    assert(MList.sum(ints2) == 0)
+    assert(sum(ints2) == 0)
 
-    assert(MList.sum(NList) == 0)
+    assert(sum(NList) == 0)
     
   }
 
   test("exe_3 - product") {
     val a = MList(1.1, 2.2, 3.3)
-    assert(MList.product(a) == 1.1 * 2.2 * 3.3)
+    assert(product(a) == 1.1 * 2.2 * 3.3)
 
-    val result2 = MList.product(MList(1.1, -5.5, 0.9))
+    val result2 = product(MList(1.1, -5.5, 0.9))
     val expected2 = 1.1 * -5.5 * 0.9
     result2 should be (expected2 plusOrMinus 0.00001)
   }
 
   test("exe_3 - product 0 case") {
     val a1 = MList(1.1, 0.0, 2.2, 3.3)
-    assert(MList.product(a1) == 0.0)
+    assert(product(a1) == 0.0)
     val a2 = MList(-1.1, -4321.2, 0.0, 2.2, 3.3)
-    assert( MList.product(a2) == 0.0 )
+    assert( product(a2) == 0.0 )
   }
 
   test("exe_3 - product null case") {
-    assert(MList.product(NList) == 1.0)
+    assert(product(NList) == 1.0)
   }
   test("exe_3.2 - tail") {
     val ints = MList(1,2,3,4,5)
-    val ints2 = MList.tail(ints)
+    val ints2 = tail(ints)
     assert(ints2 == MList(2,3,4,5))
 
-    val ints3 = MList.tail(MList.tail(ints2))
+    val ints3 = tail(tail(ints2))
     assert(ints3 == MList(4,5))
 
     val one = MList(3)
-    assert(MList.tail(one) == NList)
+    assert(tail(one) == NList)
 
   }
   
   test("exe_3.2 - tail null case") {
-    assert(MList.tail(NList) == NList)
+    assert(tail(NList) == NList)
   }
-
-
 
   test("exe_3.3 - setHead") {
     val a = MList(1,2,3,4,5)
-    val r = MList.setHead(a, 999)
+    val r = setHead(a, 999)
     r should equal (MList(999,2,3,4,5))
 
     val a2 = MList(6,31,21,3)
-    val r2 = MList.setHead(a2, -3)
+    val r2 = setHead(a2, -3)
     r2 should equal (MList(-3,31,21,3))
   }
 
   test("exe_3.3 - setHead null case") {
-    val r = MList.setHead(NList, 3)
+    val r = setHead(NList, 3)
     r should equal (NList)
   }
 }
