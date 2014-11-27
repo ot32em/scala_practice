@@ -113,6 +113,15 @@ class MListTest extends FunSuite with Matchers
   // def dropWhile, which removes elements from the List prefix as long as they
   // match a predicate
   // def dropWhile[A](l: List[A], f: A=> Boolean): List[A]
+
+  test("Exe_3.5 - dropWhile") {
+    val a = MList(1,2,3,4,5,6)
+    val r = dropWhile(a, (x: Int) => x % 2 == 0)
+    r shouldEqual MList(1,3,5)
+
+    val r2 = dropWhile(a, (x: Int) => x < 3 )
+    r2 shouldEqual MList(3,4,5,6)
+  }
   //
   // exe 3.5.2
   // def append[A], (List[A], List[A]) => List[A])
