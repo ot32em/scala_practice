@@ -12,9 +12,10 @@ object MList
     else MCons(as.head, apply(as.tail: _*))
   }
 
-  def sum(as: MList[Int]): Int = 
+  def sum(as: MList[Int]): Int = as match
   {
-    0
+    case NList => 0
+    case MCons(x, xs) => x + sum(xs)
   }
 
   def tail[A](as: MList[A]): MList[A] = as match {

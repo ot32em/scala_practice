@@ -24,6 +24,12 @@ class MListTest extends FunSuite
   test("exe_3 Test sum for add ints in MList") {
     val ints = MList(1,2,10)
     assert(MList.sum(ints) == 1+2+10)
+
+    val ints2 = MList(2, -2)
+    assert(MList.sum(ints2) == 0)
+
+    assert(MList.sum(NList) == 0)
+    
   }
 
   test("exe_3.2 - tail - rm the head") {
