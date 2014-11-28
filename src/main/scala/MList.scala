@@ -42,7 +42,11 @@ object MList
   def dropWhile[A](as: MList[A], f: A => Boolean): MList[A] = as match
   {
     case NList => NList
-    case MCons(x, xs) => if( f(x) ) dropWhile(xs, f) else MCons(x, dropWhile(xs, f))
+    case MCons(x, xs) => 
+      if(f(x)) 
+        dropWhile(xs, f) 
+      else 
+        MCons(x, dropWhile(xs, f))
   }
 
   def dropWhile_auto[A](as: MList[A])(f: A => Boolean): MList[A] = as match
@@ -52,8 +56,8 @@ object MList
   }
 
   def append[A](as: MList[A], bs: MList[A]): MList[A] = as match {
-    case MCons(x, NList) => MCons(x, bs)
     case NList => bs
+    case MCons(x, NList) => MCons(x, bs)
     case MCons(x, xs) => MCons(x, append(xs, bs))
   }
 
@@ -63,6 +67,6 @@ object MList
     case MCons(x, xs) => MCons(x, init(xs))
   }
 
-
+  def Length[A](as: MList[A]): Long = 0
 
 }

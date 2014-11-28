@@ -179,4 +179,19 @@ class MListTest extends FunSuite with Matchers
     r2 shouldEqual NList
   }
 
+  test("exe 3.9 length") {
+    val a = MList(1,2,3,4,5)
+    val r = Length(a)
+    r shouldEqual 5
+
+    val a2 = MList(1,2,3)
+    val r2 = Length(a2)
+    r2 shouldEqual 3
+  }
+
+  test("exe 3.9 length null case") {
+    val a = NList
+    val r = Length(a)
+    r shouldEqual 0
+  }
 }
