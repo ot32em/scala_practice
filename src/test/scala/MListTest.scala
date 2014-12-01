@@ -194,4 +194,10 @@ class MListTest extends FunSuite with Matchers
     val r = Length(a)
     r shouldEqual 0
   }
+
+  test("exe 3.12 reverse") {
+    val a = MList(1,2,3,4)
+    val r = reverse(a)
+    r shouldEqual MList(4,3,2,1)
+  }
 }
