@@ -12,9 +12,9 @@ object MList
     else MCons(as.head, apply(as.tail: _*))
   }
 
-  def sum(as: MList[Int]): Int = foldRight(as, 0)(_+_)
+  def sum(as: MList[Int]): Int = foldLeft(as, 0)(_+_)
 
-  def product(as: MList[Double]): Double = foldRight(as, 1.0)(_*_)
+  def product(as: MList[Double]): Double = foldLeft(as, 1.0)(_*_)
 
 
   def tail[A](as: MList[A]): MList[A] = as match {
