@@ -77,6 +77,11 @@ object MList
     case MCons(x, xs) => foldLeft(xs, f(b, x))(f)
   }
 
-  def reverse[A](as: MList[A]): MList[A] = NList
+  def reverse[A](as: MList[A]): MList[A] = 
+    foldLeft( as, NList: MList[A] )( 
+      (xs: MList[A], x: A) => MCons(x, xs)
+    )
+    
+  
 
 }
