@@ -16,11 +16,6 @@ object MList
 
   def product(as: MList[Double]): Double = foldRight(as, 1.0)(_*_)
 
-  def foldRight[A, B](as: MList[A], b: B)(f: (A, B) => B): B = as match
-  {
-    case NList => b
-    case MCons(x, xs) => f(x, foldRight(xs, b)(f))
-  }
 
   def tail[A](as: MList[A]): MList[A] = as match {
     case NList => NList
@@ -68,5 +63,11 @@ object MList
   }
 
   def Length[A](as: MList[A]): Int = foldRight(as, 0)((xs: A, x: Int) => 1 + x )
+
+  def foldRight[A, B](as: MList[A], b: B)(f: (A, B) => B): B = as match
+  {
+    case NList => b
+    case MCons(x, xs) => f(x, foldRight(xs, b)(f))
+  }
 
 }
