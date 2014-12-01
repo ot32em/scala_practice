@@ -62,7 +62,7 @@ object MList
     case MCons(x, xs) => MCons(x, init(xs))
   }
 
-  def Length[A](as: MList[A]): Int = foldRight(as, 0)((xs: A, x: Int) => 1 + x )
+  def Length[A](as: MList[A]): Int = foldLeft(as, 0)((x: Int, xs: A) => 1 + x )
 
   def foldRight[A, B](as: MList[A], b: B)(f: (A, B) => B): B = as match
   {
