@@ -70,4 +70,11 @@ object MList
     case MCons(x, xs) => f(x, foldRight(xs, b)(f))
   }
 
+  @annotation.tailrec
+  def foldLeft[A, B](as: MList[A], b: B)(f: (B, A) => B): B = as match
+  {
+    case NList => b
+    case MCons(x, xs) => foldLeft(xs, f(b, x))(f)
+  }
+
 }
