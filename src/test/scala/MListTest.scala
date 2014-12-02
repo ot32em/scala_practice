@@ -239,4 +239,10 @@ class MListTest extends FunSuite with Matchers
     val r2 = filter(a)(_%2 == 1)
     r2 shouldEqual MList(1,3,5)
   }
+
+  test("exe 3.20 flatMap") {
+    val a = MList(1,2,3)
+    val r = flatMap(a)(i=>MList(i,i))
+    r shouldEqual MList(1,1,2,2,3,3)
+  }
 }

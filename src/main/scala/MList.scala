@@ -107,4 +107,6 @@ object MList
   def filter[A](as: MList[A])(f: A => Boolean): MList[A] =
     dropWhile(as)(x => !f(x))
 
+  def flatMap[A](as: MList[A])(f: A => MList[A]): MList[A] = NList
+
 }
