@@ -50,11 +50,7 @@ object MList
     case MCons(x, xs) => if( f(x) ) dropWhile_auto(xs)(f) else MCons(x, dropWhile_auto(xs)(f))
   }
 
-  def append[A](as: MList[A], bs: MList[A]): MList[A] = as match {
-    case NList => bs
-    case MCons(x, NList) => MCons(x, bs)
-    case MCons(x, xs) => MCons(x, append(xs, bs))
-  }
+  def append[A](as: MList[A], bs: MList[A]): MList[A] = foldLeft(reverse(as), bs)((x, y)=>MCons(y, x))
 
   def init[A](as: MList[A]): MList[A] = as match {
     case NList => NList
@@ -64,13 +60,43 @@ object MList
 
   def Length[A](as: MList[A]): Int = foldLeft(as, 0)((x: Int, xs: A) => 1 + x )
 
-  def foldRight[A, B](as: MList[A], b: B)(f: (A, B) => B): B = as match
-  {
-    case NList => b
-    case MCons(x, xs) => f(x, foldRight(xs, b)(f))
-  }
+  /**
+   * extraction of foldLeft and foldRight
+   *
+   * foldLeft(cons(1, 2, 3, 4, 5, Nil), 0)(_+_)
+   * foldLeft(cons(2, 3, 4, 5, Nil), 0 + 1)(f)
+   * foldLeft(cons(3, 4, 5, Nil), (0 + 1) + 2)(f)
+   * foldLeft(cons(4, 5, Nil), ((0 + 1) + 2) + 3)(f)
+   * foldLeft(cons(5, Nil), (((0 + 1) + 2) + 3) + 4)(f)
+   * foldLeft(cons(Nil), ((((0 + 1) + 2) + 3) + 4) + 5)(f)
+   * ((((0 + 1) + 2) + 3) + 4) + 5)
+   *
+   * foldLeft(cons(2, 3, 4, 5, Nil), 1 + 0)(f)
+   * foldLeft(cons(3, 4, 5, Nil), 2 + (1 + 0))(f)
+   * foldLeft(cons(4, 5, Nil), 3 + (2 + (1 + 0)))(f)
+   * foldLeft(cons(5, Nil), 4 + (3 + (2 + (1 + 0))))(f)
+   * foldLeft(cons(Nil), 5 + (4 + (3 + (2 + (1 + 0)))))(f)
+   * 5 + (4 + (3 + (2 + (1 + 0)))))
 
-  def foldRight2[A, B](as: MList[A], b: B)(f: (A, B) => B): B =  b
+   * foldRight(cons(1,2,3,4,5,Nil), 0)(_+_)
+   * 1 + foldRight(cons(2,3,4,5,Nil), 0)(f)
+   * 1 + (2 + foldRight(cons(3,4,5,Nil), 0)(f))
+   * 1 + (2 + (3 + foldRight(cons(4,5,Nil), 0)(f)))
+   * 1 + (2 + (3 + (4 + foldRight(cons(5,Nil), 0)(f))))
+   * 1 + (2 + (3 + (4 + (5 + foldRight(cons(Nil), 0)(f)))))
+   * 1 + (2 + (3 + (4 + (5 + 0)))))
+   *
+   * foldRight(cons(2,3,4,5,Nil), 0)(f) + 1
+   * (foldRight(cons(3,4,5,Nil), 0)(f)) + 2) + 1
+   * ((foldRight(cons(4,5,Nil), 0)(f))) + 3) + 2) + 1
+   * (((foldRight(cons(5,Nil), 0)(f)))) + 4) + 3) + 2) + 1
+   * ((((foldRight(cons(Nil), 0)(f) + 5) + 4) + 3) + 2) + 1
+   * ((((0 + 5) + 4)+ 3) + 2) + 1
+   *
+   */
+  def foldRight[A, B](as: MList[A], z: B)(f: (A, B) => B): B =
+    foldLeft(reverse(as), z)( (b, a) => f(a, b))
+
   /**
    * foldright(A[1,2,3,4,5], 0)(_+_)
    * 1 + foldRight(A[2,3,4,5], 0)
@@ -91,11 +117,7 @@ object MList
     case MCons(x, xs) => foldLeft(xs, f(b, x))(f)
   }
 
-  def reverse[A](as: MList[A]): MList[A] = 
-    foldLeft( as, NList: MList[A] )( 
-      (xs: MList[A], x: A) => MCons(x, xs)
-    )
-    
-  
+  def reverse[A](as: MList[A]): MList[A] = foldLeft(as, NList:MList[A])((x, y) => MCons(y, x))
 
+  def flat[A](as: MList[MList[A]]): MList[A] = NList
 }
