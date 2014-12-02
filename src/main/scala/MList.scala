@@ -74,6 +74,13 @@ object MList
    * foldLeft(cons(5, Nil), (((0 + 1) + 2) + 3) + 4)(f)
    * foldLeft(cons(Nil), ((((0 + 1) + 2) + 3) + 4) + 5)(f)
    * ((((0 + 1) + 2) + 3) + 4) + 5)
+   *
+   * foldLeft(cons(2, 3, 4, 5, Nil), 1 + 0)(f)
+   * foldLeft(cons(3, 4, 5, Nil), 2 + (1 + 0))(f)
+   * foldLeft(cons(4, 5, Nil), 3 + (2 + (1 + 0)))(f)
+   * foldLeft(cons(5, Nil), 4 + (3 + (2 + (1 + 0))))(f)
+   * foldLeft(cons(Nil), 5 + (4 + (3 + (2 + (1 + 0)))))(f)
+   * 5 + (4 + (3 + (2 + (1 + 0)))))
 
    * foldRight(cons(1,2,3,4,5,Nil), 0)(_+_)
    * 1 + foldRight(cons(2,3,4,5,Nil), 0)(f)
@@ -83,12 +90,20 @@ object MList
    * 1 + (2 + (3 + (4 + (5 + foldRight(cons(Nil), 0)(f)))))
    * 1 + (2 + (3 + (4 + (5 + 0)))))
    *
+   * foldRight(cons(2,3,4,5,Nil), 0)(f) + 1
+   * (foldRight(cons(3,4,5,Nil), 0)(f)) + 2) + 1
+   * ((foldRight(cons(4,5,Nil), 0)(f))) + 3) + 2) + 1
+   * (((foldRight(cons(5,Nil), 0)(f)))) + 4) + 3) + 2) + 1
+   * ((((foldRight(cons(Nil), 0)(f) + 5) + 4) + 3) + 2) + 1
+   * ((((0 + 5) + 4)+ 3) + 2) + 1
+   *
    */
-  def foldRight[A, B](as: MList[A], b: B)(f: (A, B) => B): B = as match
-  {
-    case NList => b
-    case MCons(x, xs) => f(x, foldRight(xs, b)(f))
+  def foldRight[A, B](as: MList[A], z: B)(f: (A, B) => B): B = {
+    def g(b: B, a: A):B = f(a, b)
+    foldLeft(r, z)(g)
   }
+    
+
 
   @annotation.tailrec
   def foldLeft[A, B](as: MList[A], b: B)(f: (B, A) => B): B = as match
