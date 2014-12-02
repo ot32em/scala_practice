@@ -200,4 +200,10 @@ class MListTest extends FunSuite with Matchers
     val r = reverse(a)
     r shouldEqual MList(4,3,2,1)
   }
+
+  test("exe foldRight") {
+    val a = MList(1,2,3)
+    val r = foldRight(a, 0)(_+_)
+    r shouldEqual 6
+  }
 }
