@@ -119,4 +119,6 @@ object MList
       case (_,_) => NList
     }
 
+  def hasSubseq[A](as: MList[A], ss: MList[A]): Boolean = false
+
 }

@@ -252,4 +252,35 @@ class MListTest extends FunSuite with Matchers
     val r = zipWith(a, b)(_+_)
     r shouldEqual MList(8,8,8)
   }
+
+  test("exe 3.24 hasSubsequence") {
+    val a = MList(1,2,3,4)
+
+    val p1 = MList(1,2)
+    assert( hasSubseq(a, p1) )
+
+    val p2 = MList(2,3,4)
+    assert( hasSubseq(a, p2))
+
+    val p3 = MList(3,4)
+    assert( hasSubseq(a, p3))
+  }
+
+  test("exe 3.24 hasSubseq non-exists cases"){
+    val a = MList(1,2,3,4)
+
+    val n1 = MList(1,3)
+    assert( !hasSubseq(a, n1) )
+    
+    val n2 = MList(1,4)
+    assert( !hasSubseq(a, n2) )
+
+    val n3 = MList(1,3,4)
+    assert( !hasSubseq(a, n3) )
+
+    val n4 = MList(5,1,2,3,4)
+    assert( !hasSubseq(a, n4) )
+  }
+    
+    
 }
