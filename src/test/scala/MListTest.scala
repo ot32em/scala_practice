@@ -246,10 +246,10 @@ class MListTest extends FunSuite with Matchers
     r shouldEqual MList(1,1,2,2,3,3)
   }
 
-  test("exe 3.22 zipWIth") {
+  test("exe 3.22 zipWith") {
     val a = MList(1,2,3)
     val b = MList(7,6,5)
-    val r = zipWith(a, b)
+    val r = zipWith(a, b)(_+_)
     r shouldEqual MList(8,8,8)
   }
 }
