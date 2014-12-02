@@ -119,5 +119,6 @@ object MList
 
   def reverse[A](as: MList[A]): MList[A] = foldLeft(as, NList:MList[A])((x, y) => MCons(y, x))
 
-  def flat[A](as: MList[MList[A]]): MList[A] = NList
+  def flat[A](as: MList[MList[A]]): MList[A] = 
+    foldRight(as, NList:MList[A])(append(_, _))
 }
