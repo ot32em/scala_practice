@@ -94,5 +94,8 @@ object MList
   def flat[A](as: MList[MList[A]]): MList[A] = 
     foldRight(as, NList:MList[A])(append(_, _))
 
-  def plus1[Int](as: MList[Int]): MList[Int] = NList
+  def plus1(as: MList[Int]): MList[Int] = as match {
+    case NList => NList
+    case MCons(x, xs) => MCons(x+1, plus1(xs))
+  }
 }
