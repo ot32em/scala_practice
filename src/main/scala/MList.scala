@@ -64,6 +64,26 @@ object MList
 
   def Length[A](as: MList[A]): Int = foldLeft(as, 0)((x: Int, xs: A) => 1 + x )
 
+  /**
+   * extraction of foldLeft and foldRight
+   *
+   * foldLeft(cons(1, 2, 3, 4, 5, Nil), 0)(_+_)
+   * foldLeft(cons(2, 3, 4, 5, Nil), 0 + 1)(f)
+   * foldLeft(cons(3, 4, 5, Nil), (0 + 1) + 2)(f)
+   * foldLeft(cons(4, 5, Nil), ((0 + 1) + 2) + 3)(f)
+   * foldLeft(cons(5, Nil), (((0 + 1) + 2) + 3) + 4)(f)
+   * foldLeft(cons(Nil), ((((0 + 1) + 2) + 3) + 4) + 5)(f)
+   * ((((0 + 1) + 2) + 3) + 4) + 5)
+
+   * foldRight(cons(1,2,3,4,5,Nil), 0)(_+_)
+   * 1 + foldRight(cons(2,3,4,5,Nil), 0)(f)
+   * 1 + (2 + foldRight(cons(3,4,5,Nil), 0)(f))
+   * 1 + (2 + (3 + foldRight(cons(4,5,Nil), 0)(f)))
+   * 1 + (2 + (3 + (4 + foldRight(cons(5,Nil), 0)(f))))
+   * 1 + (2 + (3 + (4 + (5 + foldRight(cons(Nil), 0)(f)))))
+   * 1 + (2 + (3 + (4 + (5 + 0)))))
+   *
+   */
   def foldRight[A, B](as: MList[A], b: B)(f: (A, B) => B): B = as match
   {
     case NList => b
