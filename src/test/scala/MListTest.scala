@@ -206,4 +206,10 @@ class MListTest extends FunSuite with Matchers
     val r = foldRight(a, 0)(_+_)
     r shouldEqual 6
   }
+
+  test("exe 3.15 flat list") {
+    val a = MList(MList(1,2,3), MList(4,5,6), MList(7,8,9))
+    val b = flat(a)
+    b shouldEqual MList(1,2,3,4,5,6,7,8,9)
+  }
 }
