@@ -98,4 +98,6 @@ object MList
     case NList => NList
     case MCons(x, xs) => MCons(x+1, plus1(xs))
   }
+
+  def turnString(as: MList[Double]): MList[String] = NList
 }

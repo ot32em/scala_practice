@@ -209,4 +209,10 @@ class MListTest extends FunSuite with Matchers
     val r = plus1(a)
     r shouldEqual MList(2,3,4)
   }
+
+  test("exe 3.17 turnString") {
+    val a = MList[Double](1.1, 2.2, 3.3)
+    val r = turnString(a)
+    r shouldEqual MList("1.1", "2.2", "3.3")
+  }
 }
