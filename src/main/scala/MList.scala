@@ -103,4 +103,7 @@ object MList
     case NList => NList
     case MCons(x, xs) => MCons(f(x), map(xs)(f))
   }
+
+  def filter[A](as: MList[A])(f: A => Boolean): MList[A] = NList
+
 }

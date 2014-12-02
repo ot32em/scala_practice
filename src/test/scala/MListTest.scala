@@ -230,4 +230,13 @@ class MListTest extends FunSuite with Matchers
     val r = map(a)(_.size)
     r shouldEqual MList(5, 7, 4, 3)
   }
+
+  test("exe 3.19 filter") {
+    val a = MList(1,2,3,4,5)
+    val r = filter(a)(_%2 == 0)
+    r shouldEqual MList(2,4)
+
+    val r2 = filter(a)(_%2 == 1)
+    r2 shouldEqual MList(1,3,5)
+  }
 }
