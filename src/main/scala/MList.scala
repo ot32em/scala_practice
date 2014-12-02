@@ -98,12 +98,8 @@ object MList
    * ((((0 + 5) + 4)+ 3) + 2) + 1
    *
    */
-  def foldRight[A, B](as: MList[A], b: B)(f: (A, B) => B): B =
-  {
-    def g(gb: B, ga: A) = f(ga, gb)
-    val r = reverse(as)
-    foldLeft(r, b)(g)
-  }
+  def foldRight[A, B](as: MList[A], z: B)(f: (A, B) => B): B =
+    foldLeft(reverse(as), z)( (b, a) => f(a, b))
 
   @annotation.tailrec
   def foldLeft[A, B](as: MList[A], b: B)(f: (B, A) => B): B = as match
