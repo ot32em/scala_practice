@@ -99,5 +99,8 @@ object MList
     case MCons(x, xs) => MCons(x+1, plus1(xs))
   }
 
-  def turnString(as: MList[Double]): MList[String] = NList
+  def turnString(as: MList[Double]): MList[String] = as match {
+    case NList => NList
+    case MCons(x, xs) => MCons(x.toString, turnString(xs))
+  }
 }
