@@ -104,5 +104,9 @@ object MList
     case MCons(x, xs) => MCons(x.toString, turnString(xs))
   }
 
-  def map[A,B](as: MList[A])(f: A => B): MList[B] = NList
+  def map[A,B](as: MList[A])(f: A => B): MList[B] = as match
+  {
+    case NList => NList
+    case MCons(x, xs) => MCons(f(x), map(xs)(f))
+  }
 }
