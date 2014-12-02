@@ -215,4 +215,19 @@ class MListTest extends FunSuite with Matchers
     val r = turnString(a)
     r shouldEqual MList("1.1", "2.2", "3.3")
   }
+
+  test("exe 3.18 map") {
+    val a = MList(1,2,3)
+    val r = map(a)(_+1)
+    r shouldEqual MList(2,3,4)
+
+    val r2 = map(a)(_*2)
+    r2 shouldEqual MList(2,4,6)
+  }
+
+  test("exe 3.18 map string -> size") {
+    val a = MList("Hello", "world!!", "It's", "me.")
+    val r = map(a)(_.size)
+    r shouldEqual MList(5, 7, 4, 3)
+  }
 }

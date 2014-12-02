@@ -103,4 +103,6 @@ object MList
     case NList => NList
     case MCons(x, xs) => MCons(x.toString, turnString(xs))
   }
+
+  def map[A,B](as: MList[A])(f: A => B): MList[B] = NList
 }
