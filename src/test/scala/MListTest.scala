@@ -245,4 +245,11 @@ class MListTest extends FunSuite with Matchers
     val r = flatMap(a)(i=>MList(i,i))
     r shouldEqual MList(1,1,2,2,3,3)
   }
+
+  test("exe 3.22 zipWIth") {
+    val a = MList(1,2,3)
+    val b = MList(7,6,5)
+    val r = zipWith(a, b)
+    r shouldEqual MList(8,8,8)
+  }
 }
