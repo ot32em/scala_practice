@@ -98,12 +98,11 @@ object MList
    * ((((0 + 5) + 4)+ 3) + 2) + 1
    *
    */
-  def foldRight[A, B](as: MList[A], z: B)(f: (A, B) => B): B = {
-    def g(b: B, a: A):B = f(a, b)
-    foldLeft(r, z)(g)
+  def foldRight[A, B](as: MList[A], b: B)(f: (A, B) => B): B = as match
+  {
+    case NList => b
+    case MCons(x, xs) => f(x, foldRight(xs, b)(f))
   }
-    
-
 
   @annotation.tailrec
   def foldLeft[A, B](as: MList[A], b: B)(f: (B, A) => B): B = as match
