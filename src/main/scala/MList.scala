@@ -34,21 +34,8 @@ object MList
     case (MCons(x, xs), n) => if(n < 0) MCons(x, xs) else drop(xs, n-1)
   }
 
-  def dropWhile[A](as: MList[A], f: A => Boolean): MList[A] = as match
-  {
-    case NList => NList
-    case MCons(x, xs) => 
-      if(f(x)) 
-        dropWhile(xs, f) 
-      else 
-        MCons(x, dropWhile(xs, f))
-  }
-
-  def dropWhile_auto[A](as: MList[A])(f: A => Boolean): MList[A] = as match
-  {
-    case NList => NList
-    case MCons(x, xs) => if( f(x) ) dropWhile_auto(xs)(f) else MCons(x, dropWhile_auto(xs)(f))
-  }
+  def dropWhile[A](as: MList[A])(f: A => Boolean): MList[A] = 
+    foldRight(as, NList:MList[A])((a,b) => if(f(a)) b else MCons(a, b))
 
   def append[A](as: MList[A], bs: MList[A]): MList[A] = foldLeft(reverse(as), bs)((x, y)=>MCons(y, x))
 

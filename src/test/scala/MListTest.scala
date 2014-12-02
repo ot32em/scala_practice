@@ -116,19 +116,10 @@ class MListTest extends FunSuite with Matchers
 
   test("Exe_3.5 - dropWhile") {
     val a = MList(1,2,3,4,5,6)
-    val r = dropWhile(a, (x: Int) => x % 2 == 0)
+    val r = dropWhile(a)((x) => x % 2 == 0)
     r shouldEqual MList(1,3,5)
 
-    val r2 = dropWhile(a, (x: Int) => x < 3 )
-    r2 shouldEqual MList(3,4,5,6)
-  }
-
-  test("Exe_3.5.1 - dropWhile_auto") {
-    val a = MList(1,2,3,4,5,6)
-    val r = dropWhile_auto(a)(_ % 2 == 0)
-    r shouldEqual MList(1,3,5)
-
-    val r2 = dropWhile_auto(a)(_ < 3)
+    val r2 = dropWhile(a)((x) => x < 3 )
     r2 shouldEqual MList(3,4,5,6)
   }
 
