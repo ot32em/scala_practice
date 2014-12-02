@@ -16,12 +16,10 @@ object MList
 
   def product(as: MList[Double]): Double = foldLeft(as, 1.0)(_*_)
 
-
   def tail[A](as: MList[A]): MList[A] = as match {
     case NList => NList
     case MCons(x, xs) => xs
   }
-
 
   def setHead[A](as: MList[A], na: A): MList[A] = as match {
     case NList => NList
@@ -95,4 +93,6 @@ object MList
 
   def flat[A](as: MList[MList[A]]): MList[A] = 
     foldRight(as, NList:MList[A])(append(_, _))
+
+  def plus1[Int](as: MList[Int]): MList[Int] = NList
 }

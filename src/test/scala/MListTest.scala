@@ -203,4 +203,10 @@ class MListTest extends FunSuite with Matchers
     val b = flat(a)
     b shouldEqual MList(1,2,3,4,5,6,7,8,9)
   }
+
+  test("exe 3.16 plus1") {
+    val a = MList(1,2,3)
+    val r = plus1(a)
+    r shouldEqual MList(2,3,4)
+  }
 }
