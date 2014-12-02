@@ -50,11 +50,7 @@ object MList
     case MCons(x, xs) => if( f(x) ) dropWhile_auto(xs)(f) else MCons(x, dropWhile_auto(xs)(f))
   }
 
-  def append[A](as: MList[A], bs: MList[A]): MList[A] = as match {
-    case NList => bs
-    case MCons(x, NList) => MCons(x, bs)
-    case MCons(x, xs) => MCons(x, append(xs, bs))
-  }
+  def append[A](as: MList[A], bs: MList[A]): MList[A] = foldLeft(reverse(as), bs)((x, y)=>MCons(y, x))
 
   def init[A](as: MList[A]): MList[A] = as match {
     case NList => NList
