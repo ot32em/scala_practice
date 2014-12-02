@@ -119,6 +119,9 @@ object MList
       case (_,_) => NList
     }
 
-  def hasSubseq[A](as: MList[A], ss: MList[A]): Boolean = false
+  def hasSubseq[A](as: MList[A], ss: MList[A]): Boolean = as match{
+    case MCons(x, xs) => foldLeft(zipWith(as, ss)((x,y)=>x==y), true)(_&&_) || hasSubseq(xs, ss)
+    case _ => false
+  }
 
 }
