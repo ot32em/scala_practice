@@ -104,6 +104,7 @@ object MList
     case MCons(x, xs) => MCons(f(x), map(xs)(f))
   }
 
-  def filter[A](as: MList[A])(f: A => Boolean): MList[A] = NList
+  def filter[A](as: MList[A])(f: A => Boolean): MList[A] =
+    dropWhile(as)(x => !f(x))
 
 }
