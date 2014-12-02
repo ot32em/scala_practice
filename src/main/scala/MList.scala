@@ -94,15 +94,9 @@ object MList
   def flat[A](as: MList[MList[A]]): MList[A] = 
     foldRight(as, NList:MList[A])(append(_, _))
 
-  def plus1(as: MList[Int]): MList[Int] = as match {
-    case NList => NList
-    case MCons(x, xs) => MCons(x+1, plus1(xs))
-  }
+  def plus1(as: MList[Int]): MList[Int] = map(as)(_+1)
 
-  def turnString(as: MList[Double]): MList[String] = as match {
-    case NList => NList
-    case MCons(x, xs) => MCons(x.toString, turnString(xs))
-  }
+  def turnString(as: MList[Double]): MList[String] = map(as)(_.toString)
 
   def map[A,B](as: MList[A])(f: A => B): MList[B] = as match
   {
