@@ -113,6 +113,10 @@ object MList
     case MCons(x, xs) => append(f(x), flatMap(xs)(f))
   }
 
-  def zipWith(as: MList[Int], as2: MList[Int]): MList[Int] = NList
+  def zipWith(as: MList[Int], as2: MList[Int]): MList[Int] = (as, as2) match
+  {
+    case (MCons(x, xs), MCons(x2, xs2)) => MCons(x+x2, zipWith(xs, xs2))
+    case (_,_) => NList
+  }
 
 }
