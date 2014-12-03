@@ -13,7 +13,9 @@ object MTree {
     case MLeaf(v) => v
   }
 
-  def depth[A](t: MTree[A]): Int = 0
-
+  def depth[A](t: MTree[A]): Int = t match {
+    case MBranch(left, right) => 1 + (depth(left) max depth(right))
+    case MLeaf(v) => 1
+  }
 }
 
