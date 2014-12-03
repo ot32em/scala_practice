@@ -47,6 +47,12 @@ class MTreeTest extends FunSuite with Matchers
     val r = depth(f)
     r shouldEqual 4
   }
+
+  test("exe 3.28.1 sum") {
+    val f = fixture()
+    val r = sum(f)
+    r shouldEqual 1+2+3+4+5+6
+  }
 }
 
 

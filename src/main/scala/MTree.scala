@@ -17,5 +17,11 @@ object MTree {
     case MBranch(left, right) => 1 + (depth(left) max depth(right))
     case MLeaf(v) => 1
   }
+
+  def sum(t: MTree[Int]): Int = 0 /*t match {
+    case MBranch(left, right) => sum(left) + sum(right)
+    case MLeaf(v) => v
+  }
+  */
 }
 
