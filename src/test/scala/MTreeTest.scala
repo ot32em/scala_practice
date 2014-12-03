@@ -30,6 +30,17 @@ class MTreeTest extends FunSuite with Matchers
     val r = node_count(ab_c)
     r shouldEqual 11
   }
+
+  test("exe 3.26 maximum") {
+    val a = MBranch(MLeaf(1), MLeaf(2))
+    val b = MBranch(MLeaf(3), MLeaf(4))
+    val c = MBranch(MLeaf(5), MLeaf(6))
+    val ab = MBranch(a, b)
+    val ab_c = MBranch(ab, c)
+
+    val r = maximum(ab_c)
+    r shouldEqual 6
+  }
 }
 
 

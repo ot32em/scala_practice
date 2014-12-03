@@ -7,5 +7,8 @@ object MTree {
     case MBranch(left, right) => 1 + node_count(left) + node_count(right)
     case MLeaf(v) => 1
   }
+
+  def maximum(t: MTree[Int]): Int = 0
+
 }
 
