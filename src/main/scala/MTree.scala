@@ -18,10 +18,9 @@ object MTree {
     case MLeaf(v) => 1
   }
 
-  def sum(t: MTree[Int]): Int = 0 /*t match {
+  def sum(t: MTree[Int]): Int = t match {
     case MBranch(left, right) => sum(left) + sum(right)
     case MLeaf(v) => v
   }
-  */
 }
 
