@@ -8,7 +8,10 @@ object MTree {
     case MLeaf(v) => 1
   }
 
-  def maximum(t: MTree[Int]): Int = 0
+  def maximum(t: MTree[Int]): Int = t match {
+    case MBranch(left, right) => maximum(left) max maximum(right)
+    case MLeaf(v) => v
+  }
 
 }
 
