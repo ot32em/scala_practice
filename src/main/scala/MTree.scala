@@ -23,6 +23,9 @@ object MTree {
     case MLeaf(v) => v
   }
 
-  def map(t: MTree[Int])(f: Int => Int): MTree[Int] = MLeaf(0)
+  def map(t: MTree[Int])(f: Int => Int): MTree[Int] = t match {
+    case MBranch(left, right) => MBranch(map(left)(f), map(right)(f))
+    case MLeaf(v) => MLeaf(f(v))
+  }
 }
 
