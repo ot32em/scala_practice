@@ -14,7 +14,8 @@ class MTreeTest extends FunSuite with Matchers
     r._2 shouldEqual MLeaf(2)
   }
 
-  test("exe 3.25 node_count") {
+
+  def fixture(): MTree[Int] = {
     /**
      *              x
      *        x           x
@@ -26,29 +27,24 @@ class MTreeTest extends FunSuite with Matchers
     val b = MBranch(MLeaf(3), MLeaf(4))
     val c = MBranch(MLeaf(5), MLeaf(6))
     val ab = MBranch(a, b)
-    val ab_c = MBranch(ab, c)
-    val r = node_count(ab_c)
+    MBranch(ab, c)
+  }
+
+  test("exe 3.25 node_count") {
+    val f = fixture()
+    val r = node_count(f)
     r shouldEqual 11
   }
 
   test("exe 3.26 maximum") {
-    val a = MBranch(MLeaf(1), MLeaf(2))
-    val b = MBranch(MLeaf(3), MLeaf(4))
-    val c = MBranch(MLeaf(5), MLeaf(6))
-    val ab = MBranch(a, b)
-    val ab_c = MBranch(ab, c)
-
-    val r = maximum(ab_c)
+    val f = fixture()
+    val r = maximum(f)
     r shouldEqual 6
   }
 
   test("exe 3.27 depth") {
-    val a = MBranch(MLeaf(1), MLeaf(2))
-    val b = MBranch(MLeaf(3), MLeaf(4))
-    val c = MBranch(MLeaf(5), MLeaf(6))
-    val ab = MBranch(a, b)
-    val ab_c = MBranch(ab, c)
-    val r = depth(ab_c)
+    val f = fixture()
+    val r = depth(f)
     r shouldEqual 4
   }
 }
