@@ -13,5 +13,7 @@ object MTree {
     case MLeaf(v) => v
   }
 
+  def depth[A](t: MTree[A]): Int = 0
+
 }
 
