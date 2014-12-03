@@ -22,5 +22,7 @@ object MTree {
     case MBranch(left, right) => sum(left) + sum(right)
     case MLeaf(v) => v
   }
+
+  def map(t: MTree[Int])(f: Int => Int): MTree[Int] = MLeaf(0)
 }
 

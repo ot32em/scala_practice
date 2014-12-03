@@ -53,6 +53,14 @@ class MTreeTest extends FunSuite with Matchers
     val r = sum(f)
     r shouldEqual 1+2+3+4+5+6
   }
+
+  test("exe 3.28.2 map") {
+    val f = fixture()
+    val r = map(f)(_+4)
+    val old_s = sum(f)
+    val new_s = sum(r)
+    new_s - old_s shouldEqual 4*6
+  }
 }
 
 
