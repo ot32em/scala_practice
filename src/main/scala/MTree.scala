@@ -11,8 +11,8 @@ object MTree {
 
   def sum(t: MTree[Int]): Int = fold(t)(x=>x)(_+_)
 
-  def map(t: MTree[Int])(f: Int => Int): MTree[Int] = 
-    fold(t)(v=>MLeaf(f(v)): MTree[Int])(MBranch(_,_))
+  def map[A,B](t: MTree[A])(f: A => B): MTree[B] = 
+    fold(t)(v=>MLeaf(f(v)): MTree[B])(MBranch(_,_))
 
   def fold[A, B](t: MTree[A])(g: (A)=>B)(f: (B,B)=>B): B = t match {
     case MBranch(left, right) => f(fold(left)(g)(f), fold(right)(g)(f))
