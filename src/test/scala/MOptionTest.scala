@@ -3,7 +3,7 @@ import org.scalatest.Matchers._
 
 class MOptionTree extends FunSuite with Matchers
 {
-  test("Options ctor")
+  test("exe 4.0 Options ctor")
   {
     val a: MOption[Int] = MSome(1)
     val r = a match {
