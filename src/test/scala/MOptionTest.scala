@@ -80,5 +80,19 @@ class MOptionTree extends FunSuite with Matchers
       c should be (9.9 plusOrMinus 0.1)
   }
 
+  test("Exe 4.1 Option filter non none")
+  {
+      val a = MSome(5)
+      val b = a.filter( _ % 5 == 0)
+      b shouldEqual MSome(5)
+  }
+
+  test("Exe 4.1 Option filter none")
+  {
+      val a: MOption[Int] = MSome(4)
+      val b = a.filter( _ % 5 == 0)
+      b shouldEqual MNone
+  }
+
 }
     

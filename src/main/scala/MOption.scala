@@ -19,6 +19,8 @@ sealed trait MOption[+A]
         case MNone => default
         case _ => this
     }
+
+    def filter(f: A => Boolean): MOption[A] = this
 }
 case class MSome[A](v: A) extends MOption[A]
 case object MNone extends MOption[Nothing]
