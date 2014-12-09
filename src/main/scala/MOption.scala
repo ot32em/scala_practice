@@ -10,7 +10,10 @@ sealed trait MOption[+A]
         case MSome(x) => f(x)
     }
     
-    def getOrElse[B](default: => B): B = default
+    def getOrElse[B >: A](default: => B): B = this match {
+        case MNone => default
+        case MSome(v) => v
+    }
 }
 case class MSome[A](v: A) extends MOption[A]
 case object MNone extends MOption[Nothing]

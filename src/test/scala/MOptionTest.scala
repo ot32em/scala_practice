@@ -53,7 +53,7 @@ class MOptionTree extends FunSuite with Matchers
   }
   test("exe 4.1 Option getOrElse none")
   {
-      val a = MSome(1.1)
+      val a = MNone
       val b = a.getOrElse(9.9)
       b should be (9.9 plusOrMinus 0.1)
   }
