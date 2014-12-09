@@ -64,6 +64,7 @@ class MOptionTree extends FunSuite with Matchers
       val b = a.orElse(MSome(9.9))
       val c = b match {
           case MSome(v) => v
+          case _ => 0.0
       }
       c should be (1.1 plusOrMinus 0.1)
   }
@@ -74,6 +75,7 @@ class MOptionTree extends FunSuite with Matchers
       val b = a.orElse(MSome(9.9))
       val c = b match {
           case MSome(v) => v;
+          case _ => 0.0
       } 
       c should be (9.9 plusOrMinus 0.1)
   }
