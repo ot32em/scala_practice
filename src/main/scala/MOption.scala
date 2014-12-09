@@ -1,7 +1,7 @@
 sealed trait MOption[+A]
 {
     def map[B](f: A => B): MOption[B] = this match {
-        case MNone => MNone: MOption[B]
+        case MNone => MNone
         case MSome(x) => MSome(f(x))
     }
 
