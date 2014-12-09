@@ -28,3 +28,8 @@ sealed trait MOption[+A]
 case class MSome[A](v: A) extends MOption[A]
 case object MNone extends MOption[Nothing]
 
+
+object MOption
+{
+    def variance(as: Seq[Double]): MOption[Double] = MNone
+}
