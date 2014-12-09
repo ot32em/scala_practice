@@ -29,5 +29,20 @@ class MOptionTree extends FunSuite with Matchers
       b shouldEqual MNone
   }
 
+  def to_o100(x: Double): MOption[Int] = MSome(100)
+
+  test("exe 4.1 Option flatMap some")
+  {
+      val a = MSome(1.1)
+      val b = a.flatMap(to_o100)
+      b shouldEqual MSome(100)
+  }
+
+  test("exe 4.1 Option flatMap none")
+  {
+      val a = MNone
+      val b = a.flatMap(to_o100)
+      b shouldEqual MNone
+  }
 }
     

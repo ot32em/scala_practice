@@ -5,6 +5,7 @@ sealed trait MOption[+A]
         case MSome(x) => MSome(f(x))
     }
 
+    def flatMap[B](f: A => MOption[B]): MOption[B] = MNone
 }
 case class MSome[A](v: A) extends MOption[A]
 case object MNone extends MOption[Nothing]
