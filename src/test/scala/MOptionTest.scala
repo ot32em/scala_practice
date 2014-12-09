@@ -13,18 +13,21 @@ class MOptionTree extends FunSuite with Matchers
     r shouldEqual 1 
   }
 
-  test("Option map non none")
+  def to_100(x: Double): Int = 100
+
+  test("exe 4.1 Option map non none")
   {
-      val a:MOption[Double] = MSome(1.1)
-      val b = a.map(x => 100)
-      b shouldEqual 100
+      val a = MSome(1.1)
+      val b = a.map(to_100)
+      b shouldEqual MSome(100)
   }
 
-  test("Option map none case")
+  test("exe 4.1 Option map none case")
   {
-      val a:MOption[Double] = MNone
-      val b = a.map(x => 100)
+      val a = MNone
+      val b = a.map(to_100)
       b shouldEqual MNone
   }
+
 }
     
