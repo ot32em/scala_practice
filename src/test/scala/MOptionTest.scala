@@ -44,5 +44,18 @@ class MOptionTree extends FunSuite with Matchers
       val b = a.flatMap(to_o100)
       b shouldEqual MNone
   }
+
+  test("exe 4.1 Option getOrElse nonnone")
+  {
+      val a = MSome(1.1)
+      val b = a.getOrElse(9.9)
+      b shouldEqual (1.1 plusOrMinus 0.1)
+  }
+  test("exe 4.1 Option getOrElse none")
+  {
+      val a = MSome(1.1)
+      val b = a.getOrElse(9.9)
+      b should be (9.9 plusOrMinus 0.1)
+  }
 }
     
