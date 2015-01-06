@@ -37,9 +37,7 @@ object MOption
     }
 
     def variance(as: Seq[Double]): MOption[Double] = {
-        mean(as) flatMap ( m =>
-            MSome(as.foldLeft(0.0)((a, e)=> math.pow(e-m, 2) + a ) / as.size)
-        )
+        mean(as) flatMap (m => mean(as.map(a => math.pow(a-m, 2))))
     }
 
 
