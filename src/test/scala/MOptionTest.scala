@@ -96,12 +96,12 @@ class MOptionTree extends FunSuite with Matchers
 
   test("Exe 4.2 variance in terms of option::flatMap")
   {
-      val a = Seq(321.0, 123.123, 456.234, 654.345)
+      val a = Seq(1.0, 2.0, 3.0, 4.0, 5.0)
       val b = MOption.variance(a) match {
           case MSome(v) => v
           case _ => 0.0
       }
-      b shouldEqual (50080.8 plusOrMinus 0.1)
+      b shouldEqual (2.0 plusOrMinus 0.1)
   }
 
   test("Exe 4.2 variance in terms of option::flatMap empty Seq")
