@@ -31,12 +31,19 @@ case object MNone extends MOption[Nothing]
 
 object MOption
 {
-    def variance(as: Seq[Double]): MOption[Double] = {
-        def mean(as: Seq[Double]): Double = {
-            as.foldLeft(0.0)(_+_) / as.size
-        }
+    def mean(as: Seq[Double]): MOption[Double] = {
         if(as.isEmpty) MNone
-        else MSome(mean(as.map(v => math.pow(v - mean(as), 2))))
+        else MSome(as.foldLeft(0.0)(_+_) / as.size)
     }
+
+    def variance(as: Seq[Double]): MOption[Double] = {
+        mean(as) flatMap ( m =>
+            MSome(as.foldLeft(0.0)((a, e)=> math.pow(e-m, 2) + a ) / as.size)
+        )
+    }
+
+
+    //m = n1 + n2 + ... + nn / n
+    //v = (n1 - m)^2 + (n2 - m)^2 + ... + (nn - m)^2 / n
 
 }
