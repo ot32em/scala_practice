@@ -50,5 +50,5 @@ object MOption
         catch { case _: Throwable => MNone }
     }
 
-    def lift[A, B](f: A => B): MOption[A] => MOption[B] = (x: MOption[A]) => MNone
+    def lift[A, B](f: A => B): MOption[A] => MOption[B] = _ map f
 }
