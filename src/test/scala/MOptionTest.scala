@@ -197,7 +197,7 @@ class MOptionTree extends FunSuite with Matchers
   {
       val as = List(1,3,5)
       val v = traverse(as)(addOdd1)
-      v shouldEqual List(2,4,6)
+      v shouldEqual MSome(List(2,4,6))
   }
   
   test("exe 4.5 traverse none case")
