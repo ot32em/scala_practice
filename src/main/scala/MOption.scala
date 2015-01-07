@@ -55,4 +55,6 @@ object MOption
     def map2[A, B, C](a: MOption[A], b: MOption[B])(f: (A, B) => C): MOption[C] = {
         a flatMap (va => b map (vb => f(va, vb)))
     }
+
+    def traverse[A, B](as: List[MOption[A]]): MOption[List[A]] = MNone
 }
