@@ -178,16 +178,16 @@ class MOptionTree extends FunSuite with Matchers
   }
 
   val as = List(MSome(1), MSome(2), MSome(3))
-  test("exe 4.4 traverse all ok ")
+  test("exe 4.4 sequence all ok ")
   {
-      val v = traverse(as)
+      val v = sequence(as)
       v shouldEqual MSome(List(1,2,3))
   }
 
-  test("exe 4.4 traverse met one none")
+  test("exe 4.4 sequence met one none")
   {
       val bs = as :+ MNone
-      val v = traverse(bs)
+      val v = sequence(bs)
       v shouldEqual MNone
   }
 }

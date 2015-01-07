@@ -56,5 +56,5 @@ object MOption
         a flatMap (va => b map (vb => f(va, vb)))
     }
 
-    def traverse[A, B](as: List[MOption[A]]): MOption[List[A]] = MNone
+    def sequence[A, B](as: List[MOption[A]]): MOption[List[A]] = MNone
 }
