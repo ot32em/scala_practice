@@ -56,5 +56,10 @@ object MOption
         a flatMap (va => b map (vb => f(va, vb)))
     }
 
-    def sequence[A, B](as: List[MOption[A]]): MOption[List[A]] = MNone
+    def lift2[A, B, C](f: (A, B)=>C): (MOption[A], MOption[B]) => MOption[C] = {
+        (a: MOption[A], b: MOption[B]) => map2(a, b)(f)
+    }
+
+    def sequence[A](as: List[MOption[A]]): MOption[List[A]] =
+        as.foldLeft(MSome(List()): MOption[List[A]])(lift2(_ :+ _))
 }
