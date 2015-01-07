@@ -43,5 +43,10 @@ object MOption
 
     //m = n1 + n2 + ... + nn / n
     //v = (n1 - m)^2 + (n2 - m)^2 + ... + (nn - m)^2 / n
+    //
 
+    def theTry[A](a: => A): MOption[A] = {
+        try MSome(a)
+        catch { case _: Throwable => MNone }
+    }
 }
