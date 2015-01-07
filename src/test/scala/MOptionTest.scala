@@ -1,5 +1,6 @@
 import org.scalatest._
 import org.scalatest.Matchers._
+import MOption._
 
 class MOptionTree extends FunSuite with Matchers
 {
@@ -110,5 +111,38 @@ class MOptionTree extends FunSuite with Matchers
       val b = MOption.variance(a) 
       b shouldEqual MNone
   }
+
+  def divide(a: Int, d: Int): Int = a / d
+
+  test("Cht 4 theTry non-throw")
+  {
+      val v = divide(10,2)
+      v shouldEqual 5
+
+      try
+      {
+        val v = theTry(divide(10,5))
+        v shouldEqual MSome(2)
+      }
+      catch
+      {
+        case _: Throwable => fail("theTry(divide) should not throw exception")
+      }
+  }
+
+  test("Cht 4 theTry throw case")
+  {
+      intercept[java.lang.ArithmeticException]{
+          divide(1,0)
+      }
+      try
+      {
+        val v = theTry(divide(1,0))
+        v shouldEqual MNone
+      }
+      catch
+      {
+        case _: Throwable => fail("theTry(divide) should not throw exception")
+      }
+  }
 }
-    
