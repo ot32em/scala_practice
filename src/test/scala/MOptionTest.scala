@@ -145,4 +145,18 @@ class MOptionTree extends FunSuite with Matchers
         case _: Throwable => fail("theTry(divide) should not throw exception")
       }
   }
+
+  def add1(a: Int): Int = a + 1
+
+  test("Cht 4 lift")
+  {
+      val v = lift(add1)(MSome(1))
+      v shouldEqual MSome(2)
+  }
+
+  test("Cht 4 lift none case ")
+  {
+      val v = lift(add1)(MNone)
+      v shouldEqual MNone
+  }
 }

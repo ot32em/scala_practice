@@ -49,4 +49,6 @@ object MOption
         try MSome(a)
         catch { case _: Throwable => MNone }
     }
+
+    def lift[A, B](f: A => B): MOption[A] => MOption[B] = (x: MOption[A]) => MNone
 }
