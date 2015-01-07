@@ -51,4 +51,6 @@ object MOption
     }
 
     def lift[A, B](f: A => B): MOption[A] => MOption[B] = _ map f
+
+    def map2[A, B, C](a: MOption[A], b: MOption[B])(f: (A, B) => C): MOption[C] = MNone
 }

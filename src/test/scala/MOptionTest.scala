@@ -159,4 +159,21 @@ class MOptionTree extends FunSuite with Matchers
       val v = lift(add1)(MNone)
       v shouldEqual MNone
   }
+
+  def add(a: Int, b: Int): Int = a + b
+
+  test("ex 4.3 map2 valid case")
+  {
+     val v = map2(MSome(1), MSome(1))(add)
+     v shouldEqual MSome(2)
+  }
+
+  test("exe 4.3 map2 none case")
+  {
+      val v = map2(MSome(1), MNone)(add)
+      v shouldEqual MNone
+
+      val v2 = map2(MNone, MSome(1))(add)
+      v2 shouldEqual MNone
+  }
 }
