@@ -62,4 +62,6 @@ object MOption
 
     def sequence[A](as: List[MOption[A]]): MOption[List[A]] =
         as.foldLeft(MSome(List()): MOption[List[A]])(lift2(_ :+ _))
+
+    def traverse[A, B](as: List[A])(f: A => MOption[B]): MOption[List[B]] = MNone
 }
