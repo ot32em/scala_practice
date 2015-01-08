@@ -70,5 +70,8 @@ object MOption
             (z: MOption[List[B]], v: A) => lift2((bs: List[B], b: B)=> bs :+ b)(z, f(v))
         )
 
-    def sequenceByT[A](as: List[MOption[A]]): MOption[List[A]] = MNone
+    // MOption[A] is a A'
+    // A' => MOption[A]
+    def sequenceByT[A](as: List[MOption[A]]): MOption[List[A]] = 
+        traverse(as)(v => v)
 }
