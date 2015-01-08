@@ -191,6 +191,20 @@ class MOptionTree extends FunSuite with Matchers
       v shouldEqual MNone
   }
 
+  test("exe 4.4.2 sequenceByTraverse all ok ")
+  {
+      val v = sequenceByT(as)
+      v shouldEqual MSome(List(1,2,3))
+  }
+
+  test("exe 4.4.2 sequenceByTraverse met one none")
+  {
+      val bs = as :+ MNone
+      val v = sequenceByT(bs)
+      v shouldEqual MNone
+  }
+
+
   def addOdd1(a: Int): MOption[Int] = if(a % 2 == 1) MSome(a + 1) else MNone
 
   test("exe 4.5 traverse ok case")
