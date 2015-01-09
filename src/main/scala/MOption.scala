@@ -76,6 +76,5 @@ object MOption
 
     // MOption[A] is a A'
     // A' => MOption[A]
-    def sequenceByT[A](as: List[MOption[A]]): MOption[List[A]] = 
-        traverse(as)(v => v)
+    def sequenceByT[A](as: List[MOption[A]]): MOption[List[A]] = traverse(as)(v => v)
 }
