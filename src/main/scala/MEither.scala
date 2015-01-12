@@ -24,5 +24,14 @@ object MEither
 {
     def sequence[E, A](as: List[MEither[E, A]]): MEither[E, List[A]] = null
     def traverse[E, A, B](as: List[MEither[E, A]])(
-                          f: A => MEither[E, B]): MEither[E, List[B]] = null
+                          f: A => MEither[E, B]): MEither[E, List[B]] = 
+        as.foldLeft(
+            MRight(List()): MEither[E, List[B]]
+        )(
+            (z: MEither[E, List[B]], a: MEither[E, A]) => {
+                z map2(a flatMap (f))(
+                    (zz: List[B], bb: B) => zz :+ bb 
+                )
+            }
+        )
 }
