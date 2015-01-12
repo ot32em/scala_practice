@@ -28,21 +28,22 @@ class MEitherTest extends FunSuite with Matchers
         r shouldEqual MLeft("ERROR_VALUE")
     }
 
-    def to_100_if_pos(x: Double): MEither[String,Int] = if(x > 0) MRight(100) else MLeft("ERROR_ARGUMENT")
+    def to_100_if_pos(x: Double): MEither[String,Int] = 
+        if(x > 0) MRight(100) else MLeft("ERROR_ARGUMENT")
 
     test("exe 4.6 flatMap") {
         val v = MRight(1.0)
-        val r = v.map(to_100_if_pos)
+        val r = v.flatMap(to_100_if_pos)
         r shouldEqual MRight(100)
     }
     test("exe 4.6 flatMap none case") {
         val v = MLeft("ERROR_VALUE")
-        val r = v.map(to_100_if_pos)
+        val r = v.flatMap(to_100_if_pos)
         r shouldEqual MLeft("ERROR_VALUE")
     }
     test("exe 4.6 flatMap invalid argument case") {
         val v = MRight(-2.0)
-        val r = v.map(to_100_if_pos)
+        val r = v.flatMap(to_100_if_pos)
         r shouldEqual MLeft("ERROR_ARGUMENT")
     }
 
