@@ -14,7 +14,8 @@ trait MEither[+E, +A] {
         case MLeft(err) => b
     }
 
-    def map2[EE >: E, B, C](b: MEither[EE, B])(f: (A, B) => C): MEither[EE, C] = null
+    def map2[EE >: E, B, C](b: MEither[EE, B])(f: (A, B) => C): MEither[EE, C] = 
+        this flatMap (aa => b map (bb => f(aa, bb)))
 }
 case class MRight[+A](v: A) extends MEither[Nothing, A]
 case class MLeft[+E](e: E) extends MEither[E, Nothing]
