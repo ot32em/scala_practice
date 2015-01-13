@@ -25,7 +25,9 @@ object MEither
     def lift2[A, B, C, E](f: (A, B) => C): (MEither[E, A], MEither[E, B]) => MEither[E, C] =
         (ea: MEither[E, A], eb: MEither[E, B]) => ea flatMap ( a => eb map ( b => f(a, b)))
 
-    def sequence[E, A](as: List[MEither[E, A]]): MEither[E, List[A]] = null
+    def sequence[E, A](as: List[MEither[E, A]]): MEither[E, List[A]] =
+        traverse(as)(v => v)
+
     def traverse[E, A, B](as: List[A])(f: A => MEither[E, B]): MEither[E, List[B]] =
         as.foldLeft(
             MRight(List()): MEither[E, List[B]]
