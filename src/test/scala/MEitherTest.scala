@@ -95,19 +95,13 @@ class MEitherTest extends FunSuite with Matchers
 
 
     test("exe 4.7 traverse") {
-        val as = List(MRight(1.0), MRight(2.0), MRight(3.0))
+        val as = List(1.0, 2.0, 3.0)
         val r = traverse(as)(to_100_if_pos)
         r shouldEqual MRight(List(100,100,100))
     }
 
-    test("exe 4.7 traverse none case") {
-        val as = List(MRight(1.0), MLeft("ERROR_VALUE"), MRight(3.0))
-        val r = traverse(as)(to_100_if_pos)
-        r shouldEqual MLeft("ERROR_VALUE")
-    }
-
     test("exe 4.7 traverse invalid arg") {
-        val as = List(MRight(1.0), MRight(-2.0), MRight(3.0))
+        val as = List(1.0, -2.0, 3.0)
         val r = traverse(as)(to_100_if_pos)
         r shouldEqual MLeft("ERROR_ARGUMENT")
     }
