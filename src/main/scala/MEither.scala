@@ -14,7 +14,7 @@ trait MEither[+E, +A] {
         case MLeft(err) => b
     }
 
-    def map2[EE >: E, B, C](b: MEither[EE, B])(f: (A, B) => C): MEither[EE, C] = 
+    def map2[EE >: E, B, C](b: MEither[EE, B])(f: (A, B) => C): MEither[EE, C] =
         this flatMap (aa => b map (bb => f(aa, bb)))
 }
 case class MRight[+A](v: A) extends MEither[Nothing, A]
@@ -22,16 +22,14 @@ case class MLeft[+E](e: E) extends MEither[E, Nothing]
 
 object MEither
 {
+    def lift2[A, B, C, E](f: (A, B) => C): (MEither[E, A], MEither[E, B]) => MEither[E, C] =
+        (ea: MEither[E, A], eb: MEither[E, B]) => ea flatMap ( a => eb map ( b => f(a, b)))
+
     def sequence[E, A](as: List[MEither[E, A]]): MEither[E, List[A]] = null
-    def traverse[E, A, B](as: List[MEither[E, A]])(
-                          f: A => MEither[E, B]): MEither[E, List[B]] = 
+    def traverse[E, A, B](as: List[A])(f: A => MEither[E, B]): MEither[E, List[B]] =
         as.foldLeft(
             MRight(List()): MEither[E, List[B]]
         )(
-            (z: MEither[E, List[B]], a: MEither[E, A]) => {
-                z map2(a flatMap (f))(
-                    (zz: List[B], bb: B) => zz :+ bb 
-                )
-            }
+            (ez: MEither[E, List[B]], a: A) => lift2((z: List[B], b: B) => z :+ b)(ez, f(a))
         )
 }
